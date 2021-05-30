@@ -13,11 +13,11 @@ let candidateAnswer = '';
 // Declaring and initializing the questions and answers for the quiz through arrays in a particular order so each 
 // question and answer matches
 let questions = [
-    'Who was the first American woman in space?',
-    'True or false: 5 kilometers == 5000 meters?',
-    '(5 + 3) / 2 * 10 = ?',
-    'Given the array [8, \'Orbit\', \'Trajectory\', 45], what entry is at index 2?',
-    'What is the minimum crew size for the ISS?'
+    'Who was the first American woman in space? ',
+    'True or false: 5 kilometers == 5000 meters? ',
+    '(5 + 3) / 2 * 10 = ? ',
+    'Given the array [8, \'Orbit\', \'Trajectory\', 45], what entry is at index 2? ',
+    'What is the minimum crew size for the ISS? '
 ];
 let correctAnswers = [
     'Sally Ride',
@@ -40,7 +40,7 @@ function askQuestion() {
 
     // Looping through each question and asking for the answer. Then displaying the correct answer
     for (let i = 0; i < questions.length; i++) {
-        console.log(`${i + 1}) ${questions[i]} `);
+        console.log(`${i + 1}) ${questions[i]}`);
         candidateAnswers[i] = ask(`Your Answer: `);
         console.log(`Correct Answer: ${correctAnswers[i]}\n`);
     }
