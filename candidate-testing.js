@@ -1,11 +1,7 @@
 const input = require('readline-sync');
 const ask = input.question;
 
-// TODO 2: modify your quiz app to ask 5 questions //
-
-// TODO 1.1a: Define candidateName
 let candidateName = '';
-// TODO 1.2a: Define question, correctAnswer, and candidateAnswer
 let question = 'Who was the first American woman in space? ';
 let correctAnswer = 'Sally Ride';
 let candidateAnswer = '';
@@ -28,15 +24,13 @@ let correctAnswers = [
 ];
 let candidateAnswers = [];
 
+let numOfCorrectAnswers = 0;
 
 function askForName() {
-    // TODO 1.1b: Ask for candidate's name
     candidateName = ask('Candidate Name: ');
 }
 
 function askQuestion() {
-    // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer
-    // candidateAnswer = ask(question);
 
     // Looping through each question and asking for the answer. Then displaying the correct answer
     for (let i = 0; i < questions.length; i++) {
@@ -47,18 +41,6 @@ function askQuestion() {
 }
 
 function gradeQuiz(candidateAnswers) {
-    // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly
-    //   if (candidateAnswer === correctAnswer) {
-    //     console.log(`Congratulations, ${candidateName}! You are correct!`);
-    //   } else {
-    //     console.log(`Sorry, ${candidateName}... Better luck next time!`);
-    //   }
-
-    //   console.log(`Candidate Answers: ${candidateAnswers}... Correct Answers: ${correctAnswers}`);
-
-    let grade = '';
-    let status = '';
-    let numOfCorrectAnswers = 0;
 
     // Incrementing numOfCorrectAnswers each time candidateAnswers[i] and correctAnswers[i] equals each other
     for (let i = 0; i < correctAnswers.length; i++) {
@@ -66,28 +48,24 @@ function gradeQuiz(candidateAnswers) {
             numOfCorrectAnswers += 1;
         }
     }
-
-    // Calculate the percentage of correct answers and give pass or fail
-    const gradingEquation = numOfCorrectAnswers / questions.length * 100;
-    if (gradingEquation >= 80) {
-        status = 'PASSED';
-    } else {
-        status = 'FAILED';
-    }
-
-    grade = `>>> Overall Grade: ${gradingEquation}% (${numOfCorrectAnswers} of ` +
-        `${questions.length} responses correct) <<< \n>>> Status: ${status} <<<`;
-
-    return grade;
+    
+    return numOfCorrectAnswers / questions.length * 100;
 }
 
 function runProgram() {
-    askForName();
-    // TODO 1.1c: Ask for candidate's name //
-    //   console.log(`Welcome to this quiz, ${candidateName}!`);
-    askQuestion();
-    console.log(gradeQuiz(this.candidateAnswers));
+    let status = '';
 
+    askForName();
+    askQuestion();
+    const grade = gradeQuiz(this.candidateAnswers);
+
+    if (grade >= 80) {
+            status = 'PASSED';
+        } else {
+            status = 'FAILED';
+        }
+
+    console.log(`>>> Overall Grade: ${grade}% (${numOfCorrectAnswers} of ${questions.length} responses correct) <<< \n>>> Status: ${status} <<<`);
 }
 
 // Don't write any code below this line //
