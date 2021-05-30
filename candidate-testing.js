@@ -41,15 +41,17 @@ function askQuestion() {
 }
 
 function gradeQuiz(candidateAnswers) {
+    let points = 0;
 
     // Incrementing numOfCorrectAnswers each time candidateAnswers[i] and correctAnswers[i] equals each other
     for (let i = 0; i < correctAnswers.length; i++) {
         if (candidateAnswers[i].toLowerCase().trim() === correctAnswers[i].toLowerCase().trim()) {
             numOfCorrectAnswers += 1;
+            points += 20;
         }
     }
     
-    return numOfCorrectAnswers / questions.length * 100;
+    return points;
 }
 
 function runProgram() {
@@ -57,7 +59,7 @@ function runProgram() {
 
     askForName();
     askQuestion();
-    const grade = gradeQuiz(this.candidateAnswers);
+    let grade = gradeQuiz(this.candidateAnswers);
 
     if (grade >= 80) {
             status = 'PASSED';
