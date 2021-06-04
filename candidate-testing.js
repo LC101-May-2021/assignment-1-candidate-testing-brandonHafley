@@ -24,6 +24,8 @@ let correctAnswers = [
 ];
 let candidateAnswers = [];
 
+let numOfCorrectAnswers = 0;
+
 function askForName() {
     candidateName = ask('Candidate Name: ');
 }
@@ -39,25 +41,33 @@ function askQuestion() {
 }
 
 function gradeQuiz(candidateAnswers) {
-    let numOfCorrectAnswers = 0;
+    let points = 0;
 
     // Incrementing numOfCorrectAnswers each time candidateAnswers[i] and correctAnswers[i] equals each other
     for (let i = 0; i < correctAnswers.length; i++) {
-        if (candidateAnswers[i].toLowerCase().trim() === correctAnswers[i].toLowerCase()) {
+        if (candidateAnswers[i].toLowerCase().trim() === correctAnswers[i].toLowerCase().trim()) {
             numOfCorrectAnswers += 1;
+            points += 20;
         }
     }
-
-    let grade = (numOfCorrectAnswers / questions.length) * 100;
     
-    return `>>> Overall Grade: ${grade}% (${numOfCorrectAnswers} of ${questions.length} responses correct) <<< \n>>> Status: ${grade >= 80 ? 'PASSED' : 'FAILED'} <<<`;
+    return points;
 }
 
 function runProgram() {
+    let status = '';
+
     askForName();
     askQuestion();
-    
-    console.log(gradeQuiz(this.candidateAnswers));
+    let grade = gradeQuiz(this.candidateAnswers);
+
+    if (grade >= 80) {
+            status = 'PASSED';
+        } else {
+            status = 'FAILED';
+        }
+
+    console.log(`>>> Overall Grade: ${grade}% (${numOfCorrectAnswers} of ${questions.length} responses correct) <<< \n>>> Status: ${status} <<<`);
 }
 
 // Don't write any code below this line //
